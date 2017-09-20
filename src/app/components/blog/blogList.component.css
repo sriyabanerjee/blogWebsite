@@ -1,0 +1,32 @@
+
+.navbar-default  {
+  background-color:#085596;
+  background-image: none;
+  background-repeat: no-repeat;
+ }
+ .navbar-brand
+ {
+    color: white;
+}
+.navbar-default a.navbar-brand:hover
+{
+    color: white;
+}
+ .navbar-default a:hover,
+.navbar-default a:visited,
+.navbar-default a:link
+{
+    color: white;
+}
+.text-bold{
+    font-weight: 700;
+}
+.navbar-default i
+{
+        padding-top: 9px;
+        font-size:30px;
+        color:white;
+        
+}
+
+

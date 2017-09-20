@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+  font-family: 'Open Sans', sans-serif !important;
+  font-weight: 300;
+}
+
+.modal-dialog {
+    width: 400px !important;
+    margin: 30px auto;
+}

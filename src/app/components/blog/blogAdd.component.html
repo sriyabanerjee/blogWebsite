@@ -1,0 +1,56 @@
+ <nav class="navbar navbar-default bg-primary">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" ><img width="100px" height="50px" src="assets/blog1.png" alt="Dispute Bills" style="position:relative">
+        </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a routerLink="/list" >Home</a></li>
+      <li><a routerLink="/add" >New Blog</a></li>
+      <li><a href="#">Users</a></li>
+     </ul>
+    
+    <ul class="nav navbar-nav navbar-right">
+      <li> <i class="fa fa-sign-out" tooltip ="Logout"  placement='bottom' (click)=doLogOut()></i></li>
+    </ul>
+    <div class="navbar-header navbar-right">
+      <a class="navbar-brand">Welcome &nbsp; {{user}}</a>
+    </div>
+  </div>
+</nav> 
+
+<div class="container">
+  <form class="form-group" (submit)="doAdd()">
+    <label > Author Name:</label><br/>
+    <input type="text" name="blog.userName" class="form-control" [(ngModel)]="blog.userName" readonly/><br/>
+    <label> Author ID:</label><br/>
+    <input type="text"  name="blog.userId" class="form-control" [(ngModel)]="blog.userId" readonly/><br/>
+    <label > Blog Subject:</label><br/>
+    <input type="text" name="blog.name" class="form-control" [(ngModel)]="blog.name"/><br/>
+    <label> Blog Here!!!</label><br/>
+    <textarea  id="text1" name="blog.description" class="form-control form-control-lg" [(ngModel)]="blog.description"> </textarea><br/>
+    <button type="submit" class="btn btn-success center-block">Submit</button>
+  </form>
+</div >
+<template #sriya >
+ <!--<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"> --> 
+  <div class="modal-dialog modal-sm">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Sucess</h4>
+    <!--<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>-->
+  </div>
+  <div class="modal-body">
+   You have sucessfully edited the blog.
+  </div>
+  </div>
+ <!--</div>-->
+  
+</template>
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted"><marquee>You are Currently visited Bloggines.com. Enjoy reading our blogs and write more. Wish you a happy day...</marquee></p>
+      </div>
+</footer> 
+

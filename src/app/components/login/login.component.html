@@ -1,0 +1,38 @@
+<div class="container" >
+    <form class="form-signin" (submit)="getToken()">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <label  class="sr-only">User Name:</label>
+            <input type="text" id="inputEmail" class="form-control" placeholder="user name" name="username" [(ngModel)]="login.username" required autofocus />
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" [(ngModel)]="login.password" required />
+             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+             New User? Please Click
+            <a layout="row" layout-align="center end">
+             <u (click)="openModal(newUserRegistration)"> Here </u>
+            </a>
+             to Register.
+    </form>
+</div> <!-- /container -->
+<template #newUserRegistration>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New User Registration</h4>
+  </div>
+  <div class="modal-body">
+    <form class="form-group">
+    <label > User Name:</label><br/>
+    <input type="text" name="newUser.username" class="form-control" [(ngModel)]="newUser.username" /><br/>
+    <label > Password:</label><br/>
+    <input type="password" name="newUser.password" class="form-control" [(ngModel)]="newUser.password"/><br/>
+    <label> Email Address:</label><br/>
+    <input type="text" name="newUser.email" class="form-control" [(ngModel)]="newUser.email"/><br/>
+    </form>
+  </div>
+  <div class="modal-footer ">
+      <div class="row">
+        <div class="col-sm-12 text-right" >
+          <button type="button" class="btn btn-success" (click)="createNewUser()">Submit</button>
+          <button type="button" class="btn btn-success" (click)="doHide()">Cancel</button>
+        </div>
+      </div>
+    </div>
+</template>

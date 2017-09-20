@@ -1,0 +1,83 @@
+ <nav class="navbar navbar-default bg-primary">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" ><img width="100px" height="50px" src="assets/blog1.png" alt="Dispute Bills" style="position:relative">
+        </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="">Home</a></li>
+      <li><a routerLink="/add" >New Blog</a></li>
+      <li><a href="">Users</a></li>
+    </ul>
+    
+    <ul class="nav navbar-nav navbar-right">
+      <li> <i class="fa fa-sign-out" tooltip ="Logout"  placement='bottom' (click)=doLogOut()></i></li>
+    </ul>
+    <div class="navbar-header navbar-right">
+      <a class="navbar-brand">Welcome &nbsp; {{user}}</a>
+    </div>
+  </div>
+</nav>  
+<div class="container">
+    <div class='table-responsive'>
+    <table  id="listTable" class="table table-bordered table-hover table-striped">
+        <caption >
+            <h1 class=" text-primary text-center text-bold">Blog Lists</h1>
+        </caption>
+        <thead>
+          
+<select class="form-control"  >
+      <option *ngFor="let x of users" [value]="x.username">{{x.username}}</option>
+    </select>
+            <tr>
+                
+                    <th ><b>Blog ID</b></th>
+                    <th ><b> Blog Subject</b></th>
+                    <th ><b>Author Name</b></th>
+                    <th colspan="3"><b>Actions</b></th>
+                
+            </tr>
+        </thead>
+        <tr *ngFor="let x of _blog">
+                <td >{{ x.id }}</td>
+                <td>{{ x.name }}</td>
+                <td>{{ x.userName }}</td>
+                <td ><button type="button" class="btn btn-md btn-success" tooltip ="Edit the Blog"  placement='bottom'(click)=doEdit(x) > Edit </button></td>
+		        <td ><button type="button" class="btn btn-md btn-inverse" (click)=doShow(x)  tooltip ="Show the Details of the Blog"  placement='bottom'> Show </button></td>
+		        <td ><button type="button" class="btn btn-md btn-danger"  (click)=doConfirm(x) tooltip ="Delete the bolg"  placement='bottom'> Delete </button></td>
+       </tr>
+    </table>
+    </div>
+    
+    <!--<button  type="button" class="btn btn-lg btn-info btn-block"  id="addNew" (click)="doAdd()">Add New Blog</button>-->
+</div>
+<template #deleteModal >
+   <div class="modal-dialog modal-sm">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Please Confirm</h4>
+    <!--<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>-->
+  </div>
+  <div class="modal-body">
+   Are You Sure, You Want to Delete this Blog?
+  </div>
+  <div class="modal-footer ">
+      <div class="row">
+        <div class="col-sm-12 text-right" >
+          <button type="button" class="btn btn-default" (click)="doDelete()">Yes</button>
+          <button type="button" class="btn btn-default" (click)="doHide()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!--</div>-->
+  
+</template>
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted"><marquee>You are Currently visited Bloggines.com. Enjoy reading our blogs and write more. Wish you a happy day...</marquee></p>
+      </div>
+</footer> 
+
+ 
