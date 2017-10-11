@@ -17,6 +17,7 @@ import { BlogAddComponent } from './components/blog/blogAdd.component';
 import { UserService } from './components/users/user.service';
 import { UserComponent } from './components/users/user.component';
 import { User } from './components/users/user';
+import { ReadMoreComponent } from './components/login/readMore.component';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     BlogEditComponent,
     BlogViewComponent,
     BlogAddComponent,
-    UserComponent
+    UserComponent,
+    ReadMoreComponent
   ],
   imports: [
     BrowserModule,

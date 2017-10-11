@@ -26,3 +26,11 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+1)Companies->Contactscheckbox, RelatedClientsCheckbox
+
+3)ArtworkOverview->ActionMenu
+4)QC overview, Retouching, Prepress,... -> Version
+5)QC overview, Retouching, Prepress,... -> ActionMenu
+6)Contact -> Related JPG sites, ... and other Contacts portal row separator not coming
+7)Estimate and Invoice Detail -> Action Menu

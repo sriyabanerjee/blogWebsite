@@ -1,10 +1,14 @@
-import { Component,TemplateRef } from '@angular/core';
+import { Component,TemplateRef,OnInit } from '@angular/core';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+
 import { LoginService } from './login.service';
+import { ReadMoreComponent } from './readMore.component';
 import { UserComponent } from 'app/components/users/user.component';
 import { UserService } from 'app/components/users/user.service';
+import { BlogService } from 'app/components/blog/blog.service';
+import { Blog } from 'app/components/blog/blog';
 import { Login } from './login';
 import { User } from 'app/components/users/user';
 import { Router } from '@angular/router';
@@ -18,6 +22,7 @@ export class LoginComponent {
   public user : User;
   public newUser : User;
   private id;
+  public _blog:Blog[];
   public modalRef: BsModalRef;
   public config = {
     
@@ -25,12 +30,27 @@ export class LoginComponent {
     ignoreBackdropClick: true
   };
     
-  constructor( private _loginService : LoginService, private _router : Router, private modalService: BsModalService,private _userService : UserService)
+  constructor( private _loginService : LoginService, private _router : Router, private modalService: BsModalService,private _userService : UserService,private _blogService : BlogService)
   {
       this.login = new Login();
       this.newUser = new User();
       
   }
+  ngOnInit()
+ {
+   
+   
+  this._blogService.getblogs().
+    subscribe((x)=>{
+      this._blog=x;
+      
+      
+    });
+ }
+ hi()
+ {
+   alert("hi");
+ }
   getToken()
   {
        this._loginService.getToken(this.login).
