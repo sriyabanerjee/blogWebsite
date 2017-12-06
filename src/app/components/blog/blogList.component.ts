@@ -1,135 +1,151 @@
-import { Component,OnInit,TemplateRef,ViewChild, ElementRef } from '@angular/core';
-import { BlogService } from './blog.service';
-import { Blog } from './blog';
-import { User } from 'app/components/users/user';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import {LoginService} from 'app/components/login/login.service';
-import {UserService} from 'app/components/users/user.service';
+
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { BlogService } from 'app/services/blog.service';
+import { Blog } from 'app/models/blog';
+import { User } from 'app/models/user';
 
-//import { Login } from './login';
+import { LoginService } from 'app/services/login.service';
+import { UserService } from 'app/services/user.service';
 
+
+/**
+ * 
+ * 
+ * @export
+ * @class BlogListComponent
+ * @implements {OnInit}
+ */
 @Component({
-  
+
   templateUrl: 'blogList.component.html',
-  //template:`<router-outlet></router-outlet>`,
+
   styleUrls: ['blogList.component.css']
 })
 export class BlogListComponent implements OnInit {
-   @ViewChild('deleteModal') deleteModal;
-  public _blog:Blog[];
+  @ViewChild('deleteModal') deleteModal;
+  @ViewChild('showModal') showModal;
+  public _blog: Blog[];
+  public singleBlog: Blog;
   public user;
-  public users : User[];
+  public users: User[];
   public modalRef: BsModalRef;
-  blog:Blog;
-  public config = {
-    
+  public blog: Blog;
+  public totalItems: number = 64;
+  public itemsPerPage: number = 3;
+  public currentPage: number = 1;
+  public smallnumPages: number = 0;
+  private _config = {
+
     backdrop: true,
     ignoreBackdropClick: true
   };
-  constructor( private _blogService : BlogService, private _router : Router, private _loginService : LoginService, private _userService : UserService, private modalService: BsModalService)
-  {
-       
-    //this._blog=new Array <Blog>();
-  } 
- ngOnInit()
- {
-   this.user=localStorage.getItem("userName");
-   
-  this._blogService.getblogs().
-    subscribe((x)=>{
-      this._blog=x;
-      
-      
-    });
-    this._userService.getAllUsers().
-  subscribe((x)=>{
-    let newUser=new User();
-    newUser.username="All";
-     x.unshift(newUser);
-       this.users=x;
-       
+  constructor(private _blogService: BlogService, private _router: Router, private _loginService: LoginService, private _userService: UserService, private _modalService: BsModalService) {
+
+
+  }
+  ngOnInit() {
+    if (!localStorage.getItem("userName")) {
+
+      this._router.navigate(["home"]);
+
+    }
+    else {
+
+      this.user = localStorage.getItem("userName");
+
+      this._userService.countUserBlogs(localStorage.getItem("userID")).
+        subscribe((x) => {
+          this.totalItems = x.count;
+        })
+
+
+      this._userService.getUserBlogsWithPagination(localStorage.getItem("userID"), 0, this.itemsPerPage).
+        subscribe((x) => {
+          this._blog = x;
+        })
+
     }
 
-  )
-    
- }
- doEdit(x)
- {
-   
-   if(x.userId==localStorage.getItem('userID'))
-   {
-     this._router.navigate(["edit",x.id]);
-     
+
+  }
+
+  /**
+   * 
+   * 
+   * @param {any} x 
+   * @memberof BlogListComponent
+   */
+  doEdit(x) {
+
+    if (x.userId == localStorage.getItem('userID')) {
+      this._router.navigate(["edit", x.id]);
+
     }
-    else{
+    else {
       alert("You are not authorized to edit this blog");
     }
- }
- doShow(x)
- {
-  
-   this._router.navigate(["view",x.id]);
- }
- doConfirm(x)
- {
-   if(x.userId==localStorage.getItem('userID'))
-   {
-     this.blog=x;
-     this.openModal(this.deleteModal);
-     
+  }
+  doShow(x) {
+    this._blogService.getBlogWithCategory(x.id).subscribe(
+      (blog) => {
+        this.singleBlog = blog;
+        this.openModal(this.showModal);
+        
+      }
+    )
+
+  }
+  doConfirm(x) {
+    if (x.userId == localStorage.getItem('userID')) {
+      this.blog = x;
+      this.openModal(this.deleteModal);
+
     }
-    else{
+    else {
       alert("You are not authorized to delete this blog");
     }
-   
-  
- }
- doHide()
- {
-   this.modalRef.hide();
- }
- doDelete()
- {
-   
-   this.modalRef.hide();
-  this._blogService.deleteBlog(this.blog).
-      subscribe((x)=>{
-        this._blogService.getblogs().
-          subscribe((x)=>{
-            this._blog=x;
-          });
-       });
- }
- doAdd()
- {
-   this._router.navigate(["add"]);
- }
- doLogOut()
-{
-  this._loginService.logOut().
-  subscribe((x) =>{
-    localStorage.removeItem('x-acess-token');
-    localStorage.removeItem('userID');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userEmail');
-    this._router.navigate(["login"]);
-  }
-  )
-} 
-/*getAllUsers()
-{
-  this._userService.getAllUsers().
-  subscribe((x)=>{
-      this.users=x;
-       
-    }
 
-  )
-}*/
-public openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template,this.config);
+
+  }
+  doHide() {
+    this.modalRef.hide();
+  }
+  doDelete() {
+
+    this.modalRef.hide();
+    this._blogService.deleteBlog(this.blog).
+      subscribe((x) => {
+        this._blogService.getblogs().
+          subscribe((x) => {
+            this._blog = x;
+          });
+      });
+  }
+  doAdd() {
+    this._router.navigate(["add"]);
+  }
+
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this._modalService.show(template, this._config);
     console.log(this.modalRef);
+  }
+  modifyBlogLists() {
+    alert();
+  }
+  public setPage(pageNo: number): void {
+    this.currentPage = pageNo;
+
+  }
+  public pageChanged(event: any): void {
+    var nextIndex = (event.page - 1) * event.itemsPerPage;
+    this._userService.getUserBlogsWithPagination(localStorage.getItem("userID"), nextIndex, this.itemsPerPage).
+      subscribe((x) => {
+        this._blog = x;
+      });
+    console.log('Page changed to: ' + event.page);
+    console.log('Number items per page: ' + event.itemsPerPage);
   }
 }

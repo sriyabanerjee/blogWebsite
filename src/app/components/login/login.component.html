@@ -1,31 +1,31 @@
-<div class="container" >
-    <!--<form class="form-signin" (submit)="getToken()">
-            <h2 class="form-signin-heading">Please sign in</h2>
+<!--<div class="modal-header">
+    <h4 class="modal-title pull-left">Please Sign In</h4>
+  </div>
+  <div class="modal-body">-->
+   <form class="form-signin" >
+            
             <label  class="sr-only">User Name:</label>
             <input type="text" id="inputEmail" class="form-control" placeholder="user name" name="username" [(ngModel)]="login.username" required autofocus />
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" [(ngModel)]="login.password" required />
-             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-             New User? Please Click
-            <a layout="row" layout-align="center end">
-             <u (click)="openModal(newUserRegistration)"> Here </u>
-            </a>
-             to Register.
-    </form>-->
-    
+            <div class="row">
+             <div class="col-sm-12 text-right" >
+          <button type="button" class="btn btn-success" (click)="getToken()">Sign in</button>
+          <button type="button" class="btn btn-success" (click)="doHideModal()">Cancel</button>
+          </div>
+        </div>           
+    </form>
+  <!--</div>
+  <div class="modal-footer ">
+      <div class="row">
+        <div class="col-sm-12 text-right" >
+          <button type="button" class="btn btn-success" (click)="getToken()">Sign in</button>
+          <button type="button" class="btn btn-success" (click)="doHide()">Cancel</button>
+        </div>
+      </div>
+    </div>-->
 
-<div class="panel panel-primary" *ngFor="let x of _blog" >
-  <div class="panel-heading">
-    <h3 class="panel-title">{{x.name}}</h3>
-  </div>
-  <div class="panel-body"  >
-    
-    <read-more [text]=x.description [maxHeight]="50"></read-more>
-  </div>
-  <div class="panel-footer">Written By: &nbsp;{{x.userName}} &nbsp; On &nbsp;{{x.creationTimeStamp}}</div>
-</div>
-</div> <!-- /container -->
-<template #newUserRegistration>
+<!--<template #newUserRegistration>
   <div class="modal-header">
     <h4 class="modal-title pull-left">New User Registration</h4>
   </div>
@@ -47,4 +47,6 @@
         </div>
       </div>
     </div>
-</template>
+</template>-->
+
+  

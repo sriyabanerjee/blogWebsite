@@ -1,0 +1,24 @@
+<div class="container">
+
+  <input class="searchBox pull-right" name="filterBlog" [(ngModel)]="searchBlog" (ngModelChange)="searchBlogs()" placeholder="Search Blogs ...">
+  <br><br>
+  <div *ngIf="!totalItems">
+    <p><b>No Record is Found ...</b></p>
+  </div>
+  <div class="panel panel-info" *ngFor="let x of blog">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{x.name}}</h3>
+    </div>
+    <div class="panel-body">
+
+      <read-more [text]=x.description [maxHeight]="100"></read-more>
+
+    </div>
+    <div class="panel-footer  text-right">Author: &nbsp;{{x.userName}} &nbsp; Date: &nbsp;{{x.creationTimeStamp| date: 'dd/MM/yyyy'}}</div>
+  </div>
+</div>
+<!-- /container -->
+<div *ngIf="totalItems">
+  <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+    class="pagination-sm" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+</div>

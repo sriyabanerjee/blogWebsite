@@ -1,0 +1,27 @@
+<form [formGroup]="RegistrationForm" class="form-register">
+    <input type="text" formControlName="username" placeholder="username" class="form-control" (ngModelChange)="hi()"required minlength="4">
+    <div *ngIf="RegistrationForm.controls['username'].errors && !RegistrationForm.controls['username'].pristine" class="error-msg">
+        <div [hidden]="!RegistrationForm.controls['username'].errors.required" class="alert alert-danger">Username is required.</div>
+        <div [hidden]="!RegistrationForm.controls['username'].errors.minlength" class="alert alert-danger">Username must be minimum four characters long.</div>
+    </div>
+    <div *ngIf="duplicateUser" class="error-msg">
+        <div [hidden]="!duplicateUser" class="alert alert-danger">Username is Already exist.</div>
+        
+    </div>
+    <input type="email" formControlName="email" placeholder="Email" class="form-control" required>
+    <div *ngIf="RegistrationForm.controls['email'].errors && !RegistrationForm.controls['email'].pristine" class="error-msg">
+        <div [hidden]="!RegistrationForm.controls['email'].errors.required" class="alert alert-danger">Email is required.</div>
+        <div [hidden]="!RegistrationForm.controls['email'].errors.patternInvalid" class="alert alert-danger">Email is invalid.</div>
+    </div>
+    <input type="password" formControlName="password" placeholder="Password" class="form-control" required minlength="4">
+    <div *ngIf="RegistrationForm.controls['password'].errors && !RegistrationForm.controls['password'].pristine" class="error-msg">
+        <div [hidden]="!RegistrationForm.controls['password'].errors.required" class="alert alert-danger">Password is required.</div>
+        <div [hidden]="!RegistrationForm.controls['password'].errors.minlength" class="alert alert-danger">Password must be minimum four characters long.</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <button  type="button" class="btn btn-success" (click)="createNewUser()">Proceed</button>
+            <button type="button" class="btn btn-success" (click)="doHide()">Cancel</button>
+        </div>
+    </div>
+</form>

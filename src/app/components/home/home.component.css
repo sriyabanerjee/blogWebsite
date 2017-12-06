@@ -2,7 +2,7 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   
- 
+  
 }
 
 .form-signin {
@@ -60,4 +60,10 @@ a:active {
 }
 #link-container {
     text-align: center;
+}
+.searchBox {
+    width: 35%;
+    border-color:  lightblue;
+    border-width: 1px;
+    border-style: solid;
 }

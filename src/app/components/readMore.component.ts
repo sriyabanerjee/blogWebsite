@@ -28,7 +28,7 @@ export class ReadMoreComponent {
     ngAfterViewInit() {
        
         let currentHeight = this.elementRef.nativeElement.getElementsByTagName('div')[0].offsetHeight;
-         alert(currentHeight);
+        
         //collapsable only if the contents make container exceed the max height
         if (currentHeight > this.maxHeight) {
             setTimeout(() =>

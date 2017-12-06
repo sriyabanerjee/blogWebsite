@@ -1,3 +1,5 @@
+import {Catagory} from 'app/models/catagory';
+
 export class Blog
 {
     
@@ -7,8 +9,7 @@ export class Blog
   public description: string;
   public userName : string;
   public creationTimeStamp : string;
-    constructor()
-    {
-
-    }
+  public catagoryId : number;
+  public catagory?: Catagory;
+    
 }
